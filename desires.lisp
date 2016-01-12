@@ -16,10 +16,13 @@
   (read-line *query-io*))
 
 (defun add-record-prompt ()
-  (format t "Lets add a desire~%")
   (make-desire
     (prompt-read "What is your desire?")
     (prompt-read "Why do you desire this?")
-    (or (parse-integer (prompt-read "What is your action plan to achieve this?") :junk-allowed t) 0)
-    (y-or-n-p (prompt-read "Have you made progress today on achieving this desire? [y/n]"))))
+    (prompt-read "What is your action plan to achieve this?")
+    (y-or-n-p  "Have you made progress today on achieving this desire? [y/n]")))
+
+(defun add-desires ()
+  (loop (add-record (add-record-prompt))
+     (if (not (y-or-n-p  "Would you like to add another desire [y/n]")) (return))))
   
