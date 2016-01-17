@@ -37,3 +37,8 @@
   (with-open-file (in filename)
     (with-standard-io-syntax
       (setf *db* (read in)))))
+
+(defun select-by-desire (desire)
+  (remove-if-not
+   #'(lambda (thing) (equal (getf thing :desire) desire))
+   *db*))
